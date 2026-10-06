@@ -6,12 +6,12 @@
 
 ---
 
-## ⚡ 1-Click Access Links
-- 🌐 **Live Web Portal with 1-Click Copy Buttons:** [https://aaryanchoube.github.io/COOS-Practical-Exam-Kit/](https://aaryanchoube.github.io/COOS-Practical-Exam-Kit/)
-- 📦 **Download Entire Kit as ZIP:** [Download ZIP](https://github.com/AaryanChoube/COOS-Practical-Exam-Kit/archive/refs/heads/main.zip)
-- 📄 **1-Page Macro Cheat Sheet (PDF):** [`COOS_ALL_CODES_MACRO_PRINT.pdf`](./COOS_ALL_CODES_MACRO_PRINT.pdf)
-- 📄 **Compact Micro Print (PDF):** [`COOS_ALL_CODES_COMPACT_MICRO_PRINT.pdf`](./COOS_ALL_CODES_COMPACT_MICRO_PRINT.pdf)
-- 🌟 **Master Viva & Oral Exam Guide (25 Q&A):** [`COOS_MASTER_VIVA_ORAL_GUIDE.pdf`](./COOS_MASTER_VIVA_ORAL_GUIDE.pdf)
+## ⚡ 1-Click Access Links (Zero-Login TinyURLs)
+- 🌐 **Live Web Portal (1-Click Copy Buttons):** [**`tinyurl.com/coos-exam`**](https://tinyurl.com/coos-exam) *(Alt: `tinyurl.com/coos-portal`)*
+- 📦 **Download Entire Kit as ZIP:** [**`tinyurl.com/coos-zip`**](https://tinyurl.com/coos-zip)
+- 📄 **1-Page Macro Cheat Sheet (PDF):** [**`tinyurl.com/coos-macro`**](https://tinyurl.com/coos-macro)
+- 📄 **Compact Micro Print (PDF):** [**`tinyurl.com/coos-micro`**](https://tinyurl.com/coos-micro)
+- 🌟 **Master Viva & Oral Exam Guide (25 Q&A):** [**`tinyurl.com/coos-viva`**](https://tinyurl.com/coos-viva)
 
 ---
 
