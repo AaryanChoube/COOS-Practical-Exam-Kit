@@ -1,0 +1,5 @@
+GitHub Repo:       https://github.com/AaryanChoube/COOS-Practical-Exam-Kit
+Web Portal:        https://aaryanchoube.github.io/COOS-Practical-Exam-Kit/  ->  https://tinyurl.com/coos-portal-2026
+1-Click ZIP:       https://github.com/AaryanChoube/COOS-Practical-Exam-Kit/archive/refs/heads/main.zip  ->  https://tinyurl.com/coos-zip-2026
+1-Page Macro PDF:  https://github.com/AaryanChoube/COOS-Practical-Exam-Kit/raw/main/COOS_ALL_CODES_MACRO_PRINT.pdf  ->  https://tinyurl.com/coos-macro-2026
+Master Viva PDF:   https://github.com/AaryanChoube/COOS-Practical-Exam-Kit/raw/main/COOS_MASTER_VIVA_ORAL_GUIDE.pdf  ->  https://tinyurl.com/coos-viva-2026
