@@ -307,205 +307,31 @@ Therefore, adding frames can never increase page faults.
     </div>
 
     <!-- TAB: EXP 2 -->
-    <div id="tab-e2" class="panel">
+        <div id="tab-e2" class="panel">
       <div class="header-bar">
         <div>
           <h2>⚡ Experiment 2: Computer Arithmetic Algorithms</h2>
           <p>Booth's Signed Multiplication, Restoring Division, Non-Restoring Division</p>
         </div>
       </div>
-      <div class="card">
-        <h3>Booth's Multiplication in C (booth.c)</h3>
-        <div class="code-box"><button class="copy-btn" onclick="copyCode('code-b-c', this)">Copy C Code</button><pre id="code-b-c">#include <stdio.h>
 
-void add(int ac[], int m[], int qn) {
-    int carry = 0;
-    for (int i = qn - 1; i >= 0; i--) {
-        int sum = ac[i] + m[i] + carry;
-        ac[i] = sum % 2;
-        carry = sum / 2;
-    }
-}
+      <!-- SECTION: JAVA (OFFICIAL COLLEGE LAB MANUAL) -->
+      <div class="card" style="border-left: 4px solid #0284c7;">
+        <span class="badge" style="background:#0284c7; color:#fff; font-size:0.85rem; padding:4px 10px;">☕ OFFICIAL COLLEGE LAB MANUAL (JAVA)</span>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:16px; margin-top:6px;">These are the exact Java programs submitted for practicals and expected in college exams.</p>
 
-void twoComplement(int m[], int comp[], int qn) {
-    int one[16] = {0};
-    one[qn - 1] = 1;
-    for (int i = 0; i < qn; i++) comp[i] = 1 - m[i];
-    int carry = 0;
-    for (int i = qn - 1; i >= 0; i--) {
-        int sum = comp[i] + one[i] + carry;
-        comp[i] = sum % 2;
-        carry = sum / 2;
-    }
-}
-
-void asr(int ac[], int q[], int *q_minus, int qn) {
-    *q_minus = q[qn - 1];
-    for (int i = qn - 1; i > 0; i--) q[i] = q[i - 1];
-    q[0] = ac[qn - 1];
-    int msb = ac[0];
-    for (int i = qn - 1; i > 0; i--) ac[i] = ac[i - 1];
-    ac[0] = msb;
-}
-
-int main() {
-    int n = 4;
-    int m[4] = {0, 1, 1, 1};    // +7
-    int q[4] = {0, 0, 1, 1};    // +3
-    int ac[4] = {0, 0, 0, 0};
-    int q_minus = 0;
-    int m_neg[4];
-    twoComplement(m, m_neg, n);
-
-    printf("=== Booth's Multiplication Algorithm ===\n");
-    printf("Multiplicand M = 7, Multiplier Q = 3\n\n");
-
-    for (int step = 1; step <= n; step++) {
-        if (q[n - 1] == 1 && q_minus == 0) {
-            add(ac, m_neg, n); // A = A - M
-        } else if (q[n - 1] == 0 && q_minus == 1) {
-            add(ac, m, n);     // A = A + M
-        }
-        asr(ac, q, &q_minus, n);
-    }
-
-    printf("Product (A Q) = ");
-    for (int i = 0; i < n; i++) printf("%d", ac[i]);
-    printf(" ");
-    for (int i = 0; i < n; i++) printf("%d", q[i]);
-    printf(" (Decimal: 21)\n");
-    return 0;
-}
-</pre></div>
-        <h3>Restoring Division in C (restoring_division.c)</h3>
-        <div class="code-box"><button class="copy-btn" onclick="copyCode('code-rd-c', this)">Copy C Code</button><pre id="code-rd-c">#include <stdio.h>
-
-int main() {
-    int dividend = 11, divisor = 3;
-    int n = 4;
-    int q[4] = {1, 0, 1, 1}; // 11
-    int m[5] = {0, 0, 0, 1, 1}; // 3
-    int a[5] = {0, 0, 0, 0, 0};
-    int m_comp[5];
-
-    // 2's complement of M
-    for (int i = 0; i < 5; i++) m_comp[i] = 1 - m[i];
-    int carry = 1;
-    for (int i = 4; i >= 0; i--) {
-        int sum = m_comp[i] + carry;
-        m_comp[i] = sum % 2;
-        carry = sum / 2;
-    }
-
-    printf("=== Restoring Division Algorithm ===\n");
-    printf("Dividend = %d, Divisor = %d\n\n", dividend, divisor);
-
-    for (int step = 1; step <= n; step++) {
-        // Shift left [A, Q]
-        for (int i = 0; i < 4; i++) a[i] = a[i + 1];
-        a[4] = q[0];
-        for (int i = 0; i < 3; i++) q[i] = q[i + 1];
-
-        // A = A - M
-        carry = 0;
-        int temp[5];
-        for (int i = 4; i >= 0; i--) {
-            int sum = a[i] + m_comp[i] + carry;
-            temp[i] = sum % 2;
-            carry = sum / 2;
-        }
-
-        if (temp[0] == 1) { // A < 0 (negative)
-            q[3] = 0;
-            // Restore A (do nothing to a)
-        } else { // A >= 0
-            for (int i = 0; i < 5; i++) a[i] = temp[i];
-            q[3] = 1;
-        }
-    }
-
-    int rem = 0, quot = 0;
-    for (int i = 0; i < 5; i++) rem = rem * 2 + a[i];
-    for (int i = 0; i < 4; i++) quot = quot * 2 + q[i];
-
-    printf("Quotient  (Q) = %d\n", quot);
-    printf("Remainder (A) = %d\n", rem);
-    return 0;
-}
-</pre></div>
-        <h3>Non-Restoring Division in C (non_restoring_division.c)</h3>
-        <div class="code-box"><button class="copy-btn" onclick="copyCode('code-nrd-c', this)">Copy C Code</button><pre id="code-nrd-c">#include <stdio.h>
-
-int main() {
-    int dividend = 11, divisor = 3;
-    int n = 4;
-    int q[4] = {1, 0, 1, 1}; // 11
-    int m[5] = {0, 0, 0, 1, 1}; // 3
-    int a[5] = {0, 0, 0, 0, 0};
-    int m_comp[5];
-
-    // 2's complement of M
-    for (int i = 0; i < 5; i++) m_comp[i] = 1 - m[i];
-    int carry = 1;
-    for (int i = 4; i >= 0; i--) {
-        int sum = m_comp[i] + carry;
-        m_comp[i] = sum % 2;
-        carry = sum / 2;
-    }
-
-    printf("=== Non-Restoring Division Algorithm ===\n");
-    printf("Dividend = %d, Divisor = %d\n\n", dividend, divisor);
-
-    for (int step = 1; step <= n; step++) {
-        int is_neg = a[0];
-        // Shift left [A, Q]
-        for (int i = 0; i < 4; i++) a[i] = a[i + 1];
-        a[4] = q[0];
-        for (int i = 0; i < 3; i++) q[i] = q[i + 1];
-
-        carry = 0;
-        int *addend = is_neg ? m : m_comp;
-        for (int i = 4; i >= 0; i--) {
-            int sum = a[i] + addend[i] + carry;
-            a[i] = sum % 2;
-            carry = sum / 2;
-        }
-
-        if (a[0] == 0) q[3] = 1;
-        else q[3] = 0;
-    }
-
-    // End correction if A is negative
-    if (a[0] == 1) {
-        carry = 0;
-        for (int i = 4; i >= 0; i--) {
-            int sum = a[i] + m[i] + carry;
-            a[i] = sum % 2;
-            carry = sum / 2;
-        }
-    }
-
-    int rem = 0, quot = 0;
-    for (int i = 0; i < 5; i++) rem = rem * 2 + a[i];
-    for (int i = 0; i < 4; i++) quot = quot * 2 + q[i];
-
-    printf("Quotient  (Q) = %d\n", quot);
-    printf("Remainder (A) = %d\n", rem);
-    return 0;
-}
-</pre></div>
-        <h3>Booth's Algorithm in Java (BoothsAlgorithm.java)</h3>
+        <h3>1. Booth's Algorithm in Java (BoothsAlgorithm.java)</h3>
         <div class="code-box"><button class="copy-btn" onclick="copyCode('code-b-j', this)">Copy Java Code</button><pre id="code-b-j">import java.util.Scanner;
 
 public class BoothsAlgorithm {
     public static String toBinary(int num, int bits) {
-        int mask = (1 << bits) - 1;
+        int mask = (1 &lt;&lt; bits) - 1;
         int val = num & mask;
         String s = Integer.toBinaryString(val);
-        while (s.length() < bits) {
+        while (s.length() &lt; bits) {
             s = "0" + s;
         }
-        if (s.length() > bits) {
+        if (s.length() &gt; bits) {
             s = s.substring(s.length() - bits);
         }
         return s;
@@ -542,37 +368,39 @@ public class BoothsAlgorithm {
         int Q_neg1 = 0;
         int count = bits;
 
-        System.out.println("\nM = " + M + " (" + toBinary(M, bits) + "), -M = " + (-M) + " (" + toBinary(-M, bits) + ")");
+        System.out.println("
+M = " + M + " (" + toBinary(M, bits) + "), -M = " + (-M) + " (" + toBinary(-M, bits) + ")");
         System.out.println("Q = " + Q + " (" + toBinary(Q, bits) + ")");
-        System.out.println("\nCycle\tOperation\t\tA\tQ\tQ-1\tCount");
+        System.out.println("
+Cycle	Operation		A	Q	Q-1	Count");
         System.out.println("-----------------------------------------------------------------");
-        System.out.println("Init\tInitial State\t\t" + toBinary(A, bits) + "\t" + toBinary(Q_val, bits) + "\t" + Q_neg1 + "\t" + count);
+        System.out.println("Init	Initial State		" + toBinary(A, bits) + "	" + toBinary(Q_val, bits) + "	" + Q_neg1 + "	" + count);
 
-        while (count > 0) {
+        while (count &gt; 0) {
             int q0 = Q_val & 1;
             String op = "";
 
             if (q0 == 1 && Q_neg1 == 0) {
                 A = A - M;
                 op = "A = A - M";
-                System.out.println(count + "\t" + op + "\t\t" + toBinary(A, bits) + "\t" + toBinary(Q_val, bits) + "\t" + Q_neg1 + "\t" + count);
+                System.out.println(count + "	" + op + "		" + toBinary(A, bits) + "	" + toBinary(Q_val, bits) + "	" + Q_neg1 + "	" + count);
             } else if (q0 == 0 && Q_neg1 == 1) {
                 A = A + M;
                 op = "A = A + M";
-                System.out.println(count + "\t" + op + "\t\t" + toBinary(A, bits) + "\t" + toBinary(Q_val, bits) + "\t" + Q_neg1 + "\t" + count);
+                System.out.println(count + "	" + op + "		" + toBinary(A, bits) + "	" + toBinary(Q_val, bits) + "	" + Q_neg1 + "	" + count);
             }
 
             // Arithmetic Right Shift
             Q_neg1 = Q_val & 1;
             int a_lsb = A & 1;
-            Q_val = (Q_val >> 1) & ((1 << (bits - 1)) - 1);
+            Q_val = (Q_val &gt;&gt; 1) & ((1 &lt;&lt; (bits - 1)) - 1);
             if (a_lsb == 1) {
-                Q_val |= (1 << (bits - 1));
+                Q_val |= (1 &lt;&lt; (bits - 1));
             }
-            A = A >> 1;
+            A = A &gt;&gt; 1;
 
             count--;
-            System.out.println(count + "\tASR\t\t\t" + toBinary(A, bits) + "\t" + toBinary(Q_val, bits) + "\t" + Q_neg1 + "\t" + count);
+            System.out.println(count + "	ASR			" + toBinary(A, bits) + "	" + toBinary(Q_val, bits) + "	" + Q_neg1 + "	" + count);
         }
 
         int product = M * Q;
@@ -581,6 +409,370 @@ public class BoothsAlgorithm {
         System.out.println("Final Product (Decimal): " + product);
         System.out.println("========================================");
     }
+}
+</pre></div>
+
+        <h3 style="margin-top:24px;">2. Restoring Division in Java (RestoringDivision.java)</h3>
+        <div class="code-box"><button class="copy-btn" onclick="copyCode('code-rd-j', this)">Copy Java Code</button><pre id="code-rd-j">import java.util.Scanner;
+
+public class RestoringDivision {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Dividend: ");
+        int dividend = sc.nextInt();
+
+        System.out.print("Enter Divisor: ");
+        int divisor = sc.nextInt();
+
+        int n = Integer.toBinaryString(dividend).length();
+
+        int A = 0;
+        int Q = dividend;
+        int M = divisor;
+
+        System.out.printf("
+%-6s	%-12s	%-12s	%s
+", "Step", "A (Binary)", "Q (Binary)", "Operation");
+
+        System.out.printf("%-6s	%-12s	%-12s	%s
+", "Init", toBinaryString(A, n + 1), toBinaryString(Q, n), "Initial Values");
+
+        for (int i = 0; i &lt; n; i++) {
+            String stepStr = String.valueOf(i + 1);
+
+            A = (A &lt;&lt; 1) | ((Q &gt;&gt; (n - 1)) & 1);
+            Q = (Q &lt;&lt; 1) & ((1 &lt;&lt; n) - 1);
+            
+            System.out.printf("%-6s	%-12s	%-12s	%s
+", stepStr + " (S)", toBinaryString(A, n + 1), toBinaryString(Q, n), "Shift Left A, Q");
+
+            A = A - M;
+            String op = "A = A - M";
+
+            if (A &lt; 0) {
+                Q = Q & (~1);
+                A = A + M;
+                op += " -&gt; A &lt; 0 (Q[0]=0, Restore A)";
+            } else {
+                Q = Q | 1;
+                op += " -&gt; A &gt;= 0 (Q[0]=1, No Restore)";
+            }
+
+            System.out.printf("%-6s	%-12s	%-12s	%s
+", stepStr + " (A)", toBinaryString(A, n + 1), toBinaryString(Q, n), op);
+           
+        }
+
+        System.out.println("
+Quotient = " + Q);
+        System.out.println("Remainder = " + A);
+
+        sc.close();
+    }
+
+    private static String toBinaryString(int val, int bits) {
+        String binary = Integer.toBinaryString(val & ((1 &lt;&lt; bits) - 1));
+        while (binary.length() &lt; bits) {
+            binary = "0" + binary;
+        }
+        return binary;
+    }
+}
+
+</pre></div>
+
+        <h3 style="margin-top:24px;">3. Non-Restoring Division in Java (NonRestoringDivision.java)</h3>
+        <div class="code-box"><button class="copy-btn" onclick="copyCode('code-nrd-j', this)">Copy Java Code</button><pre id="code-nrd-j">import java.util.Scanner;
+
+public class NonRestoringDivision {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter Dividend: ");
+        int dividend = sc.nextInt();
+        
+        System.out.print("Enter Divisor: ");
+        int divisor = sc.nextInt();
+        
+        if (divisor == 0) {
+            System.out.println("Division by zero not possible.");
+            sc.close();
+            return;
+        }
+
+        int n = Integer.toBinaryString(dividend).length();
+
+        int A = 0;
+        int Q = dividend;
+        int M = divisor;
+
+        System.out.printf("
+%-6s	%-12s	%-12s	%s
+", "Step", "A (Binary)", "Q (Binary)", "Operation");
+  
+        System.out.printf("%-6s	%-12s	%-12s	%s
+", "Init", toBinaryString(A, n + 1), toBinaryString(Q, n), "Initial Values");
+
+        for (int i = 0; i &lt; n; i++) {
+            String stepStr = String.valueOf(i + 1);
+
+            A = (A &lt;&lt; 1) | ((Q &gt;&gt; (n - 1)) & 1);
+            Q = (Q &lt;&lt; 1) & ((1 &lt;&lt; n) - 1);
+            
+            System.out.printf("%-6s	%-12s	%-12s	%s
+", stepStr + " (S)", toBinaryString(A, n + 1), toBinaryString(Q, n), "Shift Left A, Q");
+
+            String op = "";
+            if (A &gt;= 0) {
+                A = A - M;
+                op = "A = A - M";
+            } else {
+                A = A + M;
+                op = "A = A + M";
+            }
+
+            if (A &gt;= 0) {
+                Q = Q | 1;
+                op += " -&gt; A &gt;= 0 (Q[0]=1)";
+            } else {
+                Q = Q & (~1);
+                op += " -&gt; A &lt; 0 (Q[0]=0)";
+            }
+
+            System.out.printf("%-6s	%-12s	%-12s	%s
+", stepStr + " (A)", toBinaryString(A, n + 1), toBinaryString(Q, n), op);
+            
+        }
+
+        
+        if (A &lt; 0) {
+            A = A + M;
+            System.out.printf("%-6s	%-12s	%-12s	%s
+", "Corr", toBinaryString(A, n + 1), toBinaryString(Q, n), "A &lt; 0 -&gt; Correction Step (A = A + M)");
+           
+        }
+
+        System.out.println("
+Final Quotient = " + Q);
+        System.out.println("Final Remainder = " + A);
+
+        sc.close();    
+    }
+
+    private static String toBinaryString(int val, int bits) {
+        String binary = Integer.toBinaryString(val & ((1 &lt;&lt; bits) - 1));
+        while (binary.length() &lt; bits) {
+            binary = "0" + binary;
+        }
+        return binary;
+    }
+}
+</pre></div>
+      </div>
+
+      <!-- SECTION: C (ALTERNATIVE POSIX IMPLEMENTATION) -->
+      <div class="card" style="border-left: 4px solid #64748b; margin-top:20px;">
+        <span class="badge" style="background:#475569; color:#fff; font-size:0.85rem; padding:4px 10px;">⚙️ ALTERNATIVE C IMPLEMENTATIONS</span>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:16px; margin-top:6px;">Lightweight C versions using bit arrays and arithmetic shift routines.</p>
+
+        <h3>1. Booth's Multiplication in C (booth.c)</h3>
+        <div class="code-box"><button class="copy-btn" onclick="copyCode('code-b-c', this)">Copy C Code</button><pre id="code-b-c">#include &lt;stdio.h&gt;
+
+void add(int ac[], int m[], int qn) {
+    int carry = 0;
+    for (int i = qn - 1; i &gt;= 0; i--) {
+        int sum = ac[i] + m[i] + carry;
+        ac[i] = sum % 2;
+        carry = sum / 2;
+    }
+}
+
+void twoComplement(int m[], int comp[], int qn) {
+    int one[16] = {0};
+    one[qn - 1] = 1;
+    for (int i = 0; i &lt; qn; i++) comp[i] = 1 - m[i];
+    int carry = 0;
+    for (int i = qn - 1; i &gt;= 0; i--) {
+        int sum = comp[i] + one[i] + carry;
+        comp[i] = sum % 2;
+        carry = sum / 2;
+    }
+}
+
+void asr(int ac[], int q[], int *q_minus, int qn) {
+    *q_minus = q[qn - 1];
+    for (int i = qn - 1; i &gt; 0; i--) q[i] = q[i - 1];
+    q[0] = ac[qn - 1];
+    int msb = ac[0];
+    for (int i = qn - 1; i &gt; 0; i--) ac[i] = ac[i - 1];
+    ac[0] = msb;
+}
+
+int main() {
+    int n = 4;
+    int m[4] = {0, 1, 1, 1};    // +7
+    int q[4] = {0, 0, 1, 1};    // +3
+    int ac[4] = {0, 0, 0, 0};
+    int q_minus = 0;
+    int m_neg[4];
+    twoComplement(m, m_neg, n);
+
+    printf("=== Booth's Multiplication Algorithm ===
+");
+    printf("Multiplicand M = 7, Multiplier Q = 3
+
+");
+
+    for (int step = 1; step &lt;= n; step++) {
+        if (q[n - 1] == 1 && q_minus == 0) {
+            add(ac, m_neg, n); // A = A - M
+        } else if (q[n - 1] == 0 && q_minus == 1) {
+            add(ac, m, n);     // A = A + M
+        }
+        asr(ac, q, &q_minus, n);
+    }
+
+    printf("Product (A Q) = ");
+    for (int i = 0; i &lt; n; i++) printf("%d", ac[i]);
+    printf(" ");
+    for (int i = 0; i &lt; n; i++) printf("%d", q[i]);
+    printf(" (Decimal: 21)
+");
+    return 0;
+}
+</pre></div>
+
+        <h3 style="margin-top:24px;">2. Restoring Division in C (restoring_division.c)</h3>
+        <div class="code-box"><button class="copy-btn" onclick="copyCode('code-rd-c', this)">Copy C Code</button><pre id="code-rd-c">#include &lt;stdio.h&gt;
+
+int main() {
+    int dividend = 11, divisor = 3;
+    int n = 4;
+    int q[4] = {1, 0, 1, 1}; // 11
+    int m[5] = {0, 0, 0, 1, 1}; // 3
+    int a[5] = {0, 0, 0, 0, 0};
+    int m_comp[5];
+
+    // 2's complement of M
+    for (int i = 0; i &lt; 5; i++) m_comp[i] = 1 - m[i];
+    int carry = 1;
+    for (int i = 4; i &gt;= 0; i--) {
+        int sum = m_comp[i] + carry;
+        m_comp[i] = sum % 2;
+        carry = sum / 2;
+    }
+
+    printf("=== Restoring Division Algorithm ===
+");
+    printf("Dividend = %d, Divisor = %d
+
+", dividend, divisor);
+
+    for (int step = 1; step &lt;= n; step++) {
+        // Shift left [A, Q]
+        for (int i = 0; i &lt; 4; i++) a[i] = a[i + 1];
+        a[4] = q[0];
+        for (int i = 0; i &lt; 3; i++) q[i] = q[i + 1];
+
+        // A = A - M
+        carry = 0;
+        int temp[5];
+        for (int i = 4; i &gt;= 0; i--) {
+            int sum = a[i] + m_comp[i] + carry;
+            temp[i] = sum % 2;
+            carry = sum / 2;
+        }
+
+        if (temp[0] == 1) { // A &lt; 0 (negative)
+            q[3] = 0;
+            // Restore A (do nothing to a)
+        } else { // A &gt;= 0
+            for (int i = 0; i &lt; 5; i++) a[i] = temp[i];
+            q[3] = 1;
+        }
+    }
+
+    int rem = 0, quot = 0;
+    for (int i = 0; i &lt; 5; i++) rem = rem * 2 + a[i];
+    for (int i = 0; i &lt; 4; i++) quot = quot * 2 + q[i];
+
+    printf("Quotient  (Q) = %d
+", quot);
+    printf("Remainder (A) = %d
+", rem);
+    return 0;
+}
+</pre></div>
+
+        <h3 style="margin-top:24px;">3. Non-Restoring Division in C (non_restoring_division.c)</h3>
+        <div class="code-box"><button class="copy-btn" onclick="copyCode('code-nrd-c', this)">Copy C Code</button><pre id="code-nrd-c">#include &lt;stdio.h&gt;
+
+int main() {
+    int dividend = 11, divisor = 3;
+    int n = 4;
+    int q[4] = {1, 0, 1, 1}; // 11
+    int m[5] = {0, 0, 0, 1, 1}; // 3
+    int a[5] = {0, 0, 0, 0, 0};
+    int m_comp[5];
+
+    // 2's complement of M
+    for (int i = 0; i &lt; 5; i++) m_comp[i] = 1 - m[i];
+    int carry = 1;
+    for (int i = 4; i &gt;= 0; i--) {
+        int sum = m_comp[i] + carry;
+        m_comp[i] = sum % 2;
+        carry = sum / 2;
+    }
+
+    printf("=== Non-Restoring Division Algorithm ===
+");
+    printf("Dividend = %d, Divisor = %d
+
+", dividend, divisor);
+
+    for (int step = 1; step &lt;= n; step++) {
+        int is_neg = a[0];
+        // Shift left [A, Q]
+        for (int i = 0; i &lt; 4; i++) a[i] = a[i + 1];
+        a[4] = q[0];
+        for (int i = 0; i &lt; 3; i++) q[i] = q[i + 1];
+
+        carry = 0;
+        int *addend = is_neg ? m : m_comp;
+        for (int i = 4; i &gt;= 0; i--) {
+            int sum = a[i] + addend[i] + carry;
+            a[i] = sum % 2;
+            carry = sum / 2;
+        }
+
+        if (a[0] == 0) q[3] = 1;
+        else q[3] = 0;
+    }
+
+    // End correction if A is negative
+    if (a[0] == 1) {
+        carry = 0;
+        for (int i = 4; i &gt;= 0; i--) {
+            int sum = a[i] + m[i] + carry;
+            a[i] = sum % 2;
+            carry = sum / 2;
+        }
+    }
+
+    int rem = 0, quot = 0;
+    for (int i = 0; i &lt; 5; i++) rem = rem * 2 + a[i];
+    for (int i = 0; i &lt; 4; i++) quot = quot * 2 + q[i];
+
+    printf("Quotient  (Q) = %d
+", quot);
+    printf("Remainder (A) = %d
+", rem);
+    return 0;
 }
 </pre></div>
       </div>
