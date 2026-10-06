@@ -1,30 +1,30 @@
 COOS PRACTICAL & VIVA EXAM KIT - ZERO-LOGIN URLS
 =====================================================
 
-1. WEB PORTAL (1-Click Copy Code for all 8 Exp):
+1. DAA-STYLE ULTRA-COMPACT POCKET PRINT (Consolas 4.5pt, 3-Cols, 1 Page with Viva):
+   https://tinyurl.com/coos-pocket
+   Full: https://github.com/AaryanChoube/COOS-Practical-Exam-Kit/raw/main/COOS_ALL_CODES_ULTRA_COMPACT_POCKET_PRINT.pdf
+
+2. READABLE MACRO PRINT PDF (7.0 pt Consolas, 2 Columns, 2 Pages):
+   https://tinyurl.com/coos-macro
+   Full: https://github.com/AaryanChoube/COOS-Practical-Exam-Kit/raw/main/COOS_ALL_CODES_MACRO_PRINT.pdf
+
+3. COMPACT 1-PAGE CHEAT SHEET PDF (6.0 pt Consolas, 3 Columns, 1 Page):
+   https://tinyurl.com/coos-1page
+   Full: https://github.com/AaryanChoube/COOS-Practical-Exam-Kit/raw/main/COOS_ALL_CODES_1PAGE_CHEAT_SHEET.pdf
+
+4. MASTER VIVA & ORAL GUIDE PDF (25 Q&A):
+   https://tinyurl.com/coos-viva
+   Full: https://github.com/AaryanChoube/COOS-Practical-Exam-Kit/raw/main/COOS_MASTER_VIVA_ORAL_GUIDE.pdf
+
+5. WEB PORTAL (1-Click Copy Code for all 8 Exp):
    https://tinyurl.com/coos-exam
    (Alt: https://tinyurl.com/coos-portal)
    Full: https://aaryanchoube.github.io/COOS-Practical-Exam-Kit/
 
-2. DIRECT ZIP DOWNLOAD (All files, codes, PDFs):
+6. DIRECT ZIP DOWNLOAD (All files, codes, PDFs):
    https://tinyurl.com/coos-zip
    Full: https://github.com/AaryanChoube/COOS-Practical-Exam-Kit/archive/refs/heads/main.zip
-
-3. READABLE MACRO PRINT PDF (7.0 pt Consolas, 2 Columns, 2 Pages):
-   https://tinyurl.com/coos-macro
-   Full: https://github.com/AaryanChoube/COOS-Practical-Exam-Kit/raw/main/COOS_ALL_CODES_MACRO_PRINT.pdf
-
-4. COMPACT 1-PAGE CHEAT SHEET PDF (6.0 pt Consolas, 3 Columns, 1 Page):
-   https://tinyurl.com/coos-1page
-   Full: https://github.com/AaryanChoube/COOS-Practical-Exam-Kit/raw/main/COOS_ALL_CODES_1PAGE_CHEAT_SHEET.pdf
-
-5. COMPACT MICRO PRINT PDF (7.0 pt Consolas, 2 Columns, 2 Pages):
-   https://tinyurl.com/coos-micro
-   Full: https://github.com/AaryanChoube/COOS-Practical-Exam-Kit/raw/main/COOS_ALL_CODES_COMPACT_MICRO_PRINT.pdf
-
-6. MASTER VIVA & ORAL GUIDE PDF (25 Q&A):
-   https://tinyurl.com/coos-viva
-   Full: https://github.com/AaryanChoube/COOS-Practical-Exam-Kit/raw/main/COOS_MASTER_VIVA_ORAL_GUIDE.pdf
 
 GITHUB REPOSITORY:
 https://github.com/AaryanChoube/COOS-Practical-Exam-Kit
