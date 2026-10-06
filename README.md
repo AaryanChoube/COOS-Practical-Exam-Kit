@@ -9,8 +9,9 @@
 ## ⚡ 1-Click Access Links (Zero-Login TinyURLs)
 - 🌐 **Live Web Portal (1-Click Copy Buttons):** [**`tinyurl.com/coos-exam`**](https://tinyurl.com/coos-exam) *(Alt: `tinyurl.com/coos-portal`)*
 - 📦 **Download Entire Kit as ZIP:** [**`tinyurl.com/coos-zip`**](https://tinyurl.com/coos-zip)
-- 📄 **1-Page Macro Cheat Sheet (PDF):** [**`tinyurl.com/coos-macro`**](https://tinyurl.com/coos-macro)
-- 📄 **Compact Micro Print (PDF):** [**`tinyurl.com/coos-micro`**](https://tinyurl.com/coos-micro)
+- 📄 **Readable Macro Sheet (7.0 pt, 2-Page PDF):** [**`tinyurl.com/coos-macro`**](https://tinyurl.com/coos-macro) *(Large, readable font, 2 columns)*
+- 📄 **1-Page Cheat Sheet (6.0 pt, 1-Page PDF):** [**`tinyurl.com/coos-1page`**](https://tinyurl.com/coos-1page) *(Fits on 1 single side, 71% bigger than old 3.5pt)*
+- 📄 **Compact Micro Print (7.0 pt, 2-Page PDF):** [**`tinyurl.com/coos-micro`**](https://tinyurl.com/coos-micro)
 - 🌟 **Master Viva & Oral Exam Guide (25 Q&A):** [**`tinyurl.com/coos-viva`**](https://tinyurl.com/coos-viva)
 
 ---
