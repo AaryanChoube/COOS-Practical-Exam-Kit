@@ -1,0 +1,41 @@
+================================================================================
+COOS EXPERIMENT 4A - BASIC LINUX COMMANDS & SYSTEM CALLS QUICK REFERENCE
+================================================================================
+
+1. DIRECTORY COMMANDS:
+- pwd                  : Print current working directory
+- mkdir dir_name       : Create directory (mkdir -p a/b/c for nested)
+- rmdir dir_name       : Remove empty directory
+- cd path              : Change directory (cd .. goes up, cd ~ goes home)
+- ls -la               : List all files including hidden with long format permissions
+
+2. FILE MANIPULATION COMMANDS:
+- touch file.txt       : Create empty file or update timestamp
+- cat file.txt         : Display contents of file (cat > file.txt to write)
+- cp src.txt dest.txt  : Copy file (cp -r dir1 dir2 for recursive copy)
+- mv old.txt new.txt   : Move or rename file/directory
+- rm file.txt          : Remove file (rm -rf dir for force recursive remove)
+- head -n 10 file.txt  : Display first 10 lines
+- tail -n 10 file.txt  : Display last 10 lines (tail -f for live log stream)
+
+3. PERMISSIONS & OWNERSHIP:
+- chmod 754 file.txt   : Change permission (Owner=rwx 7, Group=r-x 5, Others=r-- 4)
+  r = 4 (read), w = 2 (write), x = 1 (execute)
+- chown user:group f   : Change file owner and group
+- chgrp group file     : Change group ownership
+
+4. PROCESS MANAGEMENT COMMANDS:
+- ps aux               : Report a snapshot of all active processes
+- ps -ef               : Full format process listing
+- top                  : Display dynamic real-time view of running processes
+- kill -9 PID          : Send SIGKILL signal to forcefully terminate process
+- nice -n 10 cmd       : Run command with modified scheduling priority
+- jobs / bg / fg       : Manage background and foreground jobs
+
+5. TEXT FILTERING & PIPES:
+- grep "pattern" file  : Search for pattern in file (grep -i case-insensitive, grep -v invert)
+- sort file.txt        : Sort text lines alphabetically (sort -n numeric, sort -r reverse)
+- uniq file.txt        : Filter adjacent duplicate lines
+- wc file.txt          : Count lines (-l), words (-w), and bytes (-c)
+- awk '{print $1,$3}'  : Pattern scanning and text column processing
+- cmd1 | cmd2          : Pipe output of cmd1 as input to cmd2
